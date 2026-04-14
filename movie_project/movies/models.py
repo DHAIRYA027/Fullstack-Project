@@ -237,7 +237,7 @@ class Director(models.Model):
     name = models.CharField(max_length=50)
     bio = models.TextField(default="No bio yet.")
     image = models.ImageField(upload_to="media", default="media/default.jfif")
-    movies = models.ManyToManyField(Movie, related_name="directors")
+    movies = models.ManyToManyField(Movie, related_name="directors", blank=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default="Not specified")
     birth_place = models.CharField(max_length=100, default="Not specified")
     nationality = models.CharField(max_length=50, default="Not specified")
@@ -371,3 +371,5 @@ class Award(models.Model):
 
         status = "Winner" if self.winner else "Nominee"
         return f"{self.award_name} for {self.category} - {recipient} ({self.year}) [{status}]"
+    
+    

@@ -1,6 +1,23 @@
-# Environment files
-.env
-
-# Python cache directories
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+
+# Mac
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Environment variables
+.env

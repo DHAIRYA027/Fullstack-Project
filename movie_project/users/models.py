@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
+from movies.models import Movie
 
 # Create your models here.
 
@@ -18,7 +19,7 @@ class Profile(models.Model):
     
 class Watchlist(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
-    movies = models.ManyToManyField('movies.Movie', related_name="watchlists", null=True, blank=True)
+    movies = models.ManyToManyField('movies.Movie', blank=True)
 
     def __str__(self):
         return  f"{self.user}'s watchlist"
@@ -42,7 +43,7 @@ class CustomList(models.Model):
     name = models.TextField()
     description = models.TextField(blank=True)
     profile = models.ForeignKey(Profile, related_name="lists", on_delete=models.CASCADE)
-    movies = models.ManyToManyField('movies.Movie', related_name='lists', blank=True)
+    movies = models.ManyToManyField(Movie, blank=True)
     privacy = models.TextField(choices=PRIVACY_CHOICES, default='everyone')
     ranked_list = models.BooleanField(default=False)
     created_on = models.DateTimeField(default=timezone.now, editable=False)
